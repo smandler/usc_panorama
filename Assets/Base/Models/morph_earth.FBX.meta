@@ -1,0 +1,181 @@
+fileFormatVersion: 2
+guid: 4dfe0bda38b3a7f4abd9dd4c421cf449
+timeCreated: 1459311685
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: GeoSphere003_MeshPart0
+    100002: GeoSphere003_MeshPart1
+    100004: //RootNode
+    100006: Cone001
+    100008: Cone002
+    100010: Cone003
+    100012: Cylinder001
+    100014: Cylinder002
+    100016: Cylinder003
+    100018: GeoSphere001
+    100020: GeoSphere002
+    100022: GeoSphere002_MeshPart0
+    100024: GeoSphere002_MeshPart1
+    100026: GeoSphere003
+    100028: GeoSphere004
+    100030: GeoSphere004_MeshPart0
+    100032: GeoSphere004_MeshPart1
+    100034: GeoSphere005
+    100036: GeoSphere006
+    100038: Shape001
+    100040: Shape002
+    100042: Sphere002
+    100044: Torus001
+    100046: Torus002
+    100048: Torus003
+    400000: GeoSphere003_MeshPart0
+    400002: GeoSphere003_MeshPart1
+    400004: //RootNode
+    400006: Cone001
+    400008: Cone002
+    400010: Cone003
+    400012: Cylinder001
+    400014: Cylinder002
+    400016: Cylinder003
+    400018: GeoSphere001
+    400020: GeoSphere002
+    400022: GeoSphere002_MeshPart0
+    400024: GeoSphere002_MeshPart1
+    400026: GeoSphere003
+    400028: GeoSphere004
+    400030: GeoSphere004_MeshPart0
+    400032: GeoSphere004_MeshPart1
+    400034: GeoSphere005
+    400036: GeoSphere006
+    400038: Shape001
+    400040: Shape002
+    400042: Sphere002
+    400044: Torus001
+    400046: Torus002
+    400048: Torus003
+    2300000: Cone001
+    2300002: Cone002
+    2300004: Cone003
+    2300006: Cylinder001
+    2300008: Cylinder002
+    2300010: Cylinder003
+    2300012: GeoSphere001
+    2300014: GeoSphere002_MeshPart0
+    2300016: GeoSphere002_MeshPart1
+    2300018: GeoSphere004_MeshPart0
+    2300020: GeoSphere004_MeshPart1
+    2300022: GeoSphere005
+    2300024: GeoSphere006
+    2300026: Sphere002
+    2300028: Torus001
+    2300030: Torus002
+    2300032: Torus003
+    2300034: //RootNode
+    3300000: Cone001
+    3300002: Cone002
+    3300004: Cone003
+    3300006: Cylinder001
+    3300008: Cylinder002
+    3300010: Cylinder003
+    3300012: GeoSphere001
+    3300014: GeoSphere002_MeshPart0
+    3300016: GeoSphere002_MeshPart1
+    3300018: GeoSphere004_MeshPart0
+    3300020: GeoSphere004_MeshPart1
+    3300022: GeoSphere005
+    3300024: GeoSphere006
+    3300026: Sphere002
+    3300028: Torus001
+    3300030: Torus002
+    3300032: Torus003
+    3300034: //RootNode
+    4300000: GeoSphere003_MeshPart0
+    4300002: GeoSphere003_MeshPart1
+    4300004: Sphere002
+    4300006: Cylinder001
+    4300008: Cone001
+    4300010: Torus001
+    4300012: Torus002
+    4300014: Cylinder002
+    4300016: Cone002
+    4300018: Torus003
+    4300020: Cylinder003
+    4300022: Cone003
+    4300024: GeoSphere001
+    4300026: GeoSphere002_MeshPart0
+    4300028: GeoSphere002_MeshPart1
+    4300030: GeoSphere004_MeshPart0
+    4300032: GeoSphere004_MeshPart1
+    4300034: GeoSphere005
+    4300036: GeoSphere006
+    4300038: GeoSphere007
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: GeoSphere003_MeshPart0
+    13700002: GeoSphere003_MeshPart1
+    13700004: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

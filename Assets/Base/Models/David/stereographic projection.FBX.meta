@@ -1,0 +1,98 @@
+fileFormatVersion: 2
+guid: 43bb3e1ebe178484faf38eb1e6762735
+timeCreated: 1460509906
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Group002
+    100002: Orthographic_Sphere003
+    100004: //RootNode
+    100006: Stereographic Projection Grid
+    100008: Stereographic_Projection
+    100010: Stereographic_Sphere001
+    100012: Stereographic_Sphere_Half
+    400000: Group002
+    400002: Orthographic_Sphere003
+    400004: //RootNode
+    400006: Stereographic Projection Grid
+    400008: Stereographic_Projection
+    400010: Stereographic_Sphere001
+    400012: Stereographic_Sphere_Half
+    2300000: Orthographic_Sphere003
+    2300002: Stereographic Projection Grid
+    2300004: Stereographic_Projection
+    2300006: Stereographic_Sphere001
+    2300008: Stereographic_Sphere_Half
+    3300000: Orthographic_Sphere003
+    3300002: Stereographic Projection Grid
+    3300004: Stereographic_Projection
+    3300006: Stereographic_Sphere001
+    3300008: Stereographic_Sphere_Half
+    4300000: Stereographic_Projection
+    4300002: Stereographic_Sphere001
+    4300004: Stereographic_Sphere_Half
+    4300006: Stereographic Projection Grid
+    4300008: Orthographic_Sphere003
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
