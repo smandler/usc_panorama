@@ -31,7 +31,9 @@ public class SplitImages : MonoBehaviour {
 
     public void Start()
     {
-        string url = "C:/Svetlana/project/image.jpg"; // "URI=file:" + Application.dataPath + "/image.jpg";
+        //string url = "C:/Svetlana/project/Images/image.jpg"; 
+        string url =  Application.dataPath + "/Images/image.jpg";
+        Debug.Log(url);
         rd = GetComponent<Renderer>();
         im = LoadImage(url);
 
