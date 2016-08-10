@@ -20,39 +20,41 @@ public class ParseJson : MonoBehaviour {
         }
     }
 
-    [System.Serializable]
-    public class Presentation
+
+
+
+}
+
+[System.Serializable]
+public class Presentation
+{
+    public string name;
+    public string author;
+    public string copyright;
+    public Scenes[] scenes;
+
+    public static Presentation CreateFromJSON(string jsonString)
     {
-        public string name;
-        public string author;
-        public string copyright;
-        public Scenes[] scenes;
-
-        public static Presentation CreateFromJSON(string jsonString)
-        {
-            return JsonUtility.FromJson<Presentation>(jsonString);
-        }
+        return JsonUtility.FromJson<Presentation>(jsonString);
     }
+}
 
-    [System.Serializable]
-    public class Scenes
-    {
-        public string scene;
-        public Frames[] frames;
-        public string north;
-        public string east;
-        public string south;
-        public string west;
-    }
+[System.Serializable]
+public class Scenes
+{
+    public string scene;
+    public Frames[] frames;
+    public string north;
+    public string east;
+    public string south;
+    public string west;
+}
 
-    [System.Serializable]
-    public class Frames
-    {
-        public string image;
-        public string video;
-        public int width;
-        public float hight;
-    }
-
-
+[System.Serializable]
+public class Frames
+{
+    public string image;
+    public string video;
+    public int width;
+    public float hight;
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class SplitImages : MonoBehaviour {
-    public List<Texture2D> imageTiles;
+    public List<Texture2D> imageFrames;
     public string url = Application.dataPath + "/Files/image.jpg";
 
     private Texture2D im;
@@ -32,15 +32,13 @@ public class SplitImages : MonoBehaviour {
 
     public void Start()
     {
-        //string url = "C:/Svetlana/project/Images/image.jpg"; 
-        
 
         im = LoadImage(url);
 
         if (im != null)
         {
             Split(im, im.width / 20, im.height);
-            LoadTiles();
+            LoadFrames();
         }
     }
 
@@ -74,7 +72,7 @@ public class SplitImages : MonoBehaviour {
                 Texture2D g = new Texture2D(tileWidth, tileHeight);
                 g.SetPixels(image.GetPixels(i * width, j * height, tileWidth, tileHeight));
                 g.Apply();
-                imageTiles.Add(g);
+                imageFrames.Add(g);
             }
         }
     }
@@ -95,29 +93,29 @@ public class SplitImages : MonoBehaviour {
         return tex;
     }
 
-    public void LoadTiles()
+    public void LoadFrames()
     {
-        Frame1.mainTexture = (imageTiles[0]);
-        Frame2.mainTexture = (imageTiles[1]);
-        Frame3.mainTexture = (imageTiles[2]);
-        Frame4.mainTexture = (imageTiles[3]);
-        Frame5.mainTexture = (imageTiles[4]);
-        Frame6.mainTexture = (imageTiles[5]);
-        Frame7.mainTexture = (imageTiles[6]);
-        Frame8.mainTexture = (imageTiles[7]);
-        Frame9.mainTexture = (imageTiles[8]);
-        Frame10.mainTexture = (imageTiles[9]);
+        Frame1.mainTexture = (imageFrames[0]);
+        Frame2.mainTexture = (imageFrames[1]);
+        Frame3.mainTexture = (imageFrames[2]);
+        Frame4.mainTexture = (imageFrames[3]);
+        Frame5.mainTexture = (imageFrames[4]);
+        Frame6.mainTexture = (imageFrames[5]);
+        Frame7.mainTexture = (imageFrames[6]);
+        Frame8.mainTexture = (imageFrames[7]);
+        Frame9.mainTexture = (imageFrames[8]);
+        Frame10.mainTexture = (imageFrames[9]);
 
-        Frame11.mainTexture = (imageTiles[10]);
-        Frame12.mainTexture = (imageTiles[11]);
-        Frame13.mainTexture = (imageTiles[12]);
-        Frame14.mainTexture = (imageTiles[13]);
-        Frame15.mainTexture = (imageTiles[14]);
-        Frame16.mainTexture = (imageTiles[15]);
-        Frame17.mainTexture = (imageTiles[16]);
-        Frame18.mainTexture = (imageTiles[17]);
-        Frame19.mainTexture = (imageTiles[18]);
-        Frame20.mainTexture = (imageTiles[19]);
+        Frame11.mainTexture = (imageFrames[10]);
+        Frame12.mainTexture = (imageFrames[11]);
+        Frame13.mainTexture = (imageFrames[12]);
+        Frame14.mainTexture = (imageFrames[13]);
+        Frame15.mainTexture = (imageFrames[14]);
+        Frame16.mainTexture = (imageFrames[15]);
+        Frame17.mainTexture = (imageFrames[16]);
+        Frame18.mainTexture = (imageFrames[17]);
+        Frame19.mainTexture = (imageFrames[18]);
+        Frame20.mainTexture = (imageFrames[19]);
 
     }
 }
