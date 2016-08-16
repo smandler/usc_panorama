@@ -1,0 +1,14 @@
+from json file:
+OnCreate: 
+
+Main structure is created:
+	presentation
+		scenes - 20 frames
+			frames - how many cave's columns?
+
+OnInput:
+
+Define the scene
+Fill cave's frames with new material
+Adjust width/height
+Load the scene 

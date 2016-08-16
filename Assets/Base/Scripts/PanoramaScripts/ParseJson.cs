@@ -5,25 +5,29 @@ using System.Collections.Generic;
 using System.IO;
 
 public class ParseJson : MonoBehaviour {
-    public string url = Application.dataPath + "/Files/presentation.json";
+    public static Presentation items;
 
     public void Start()
     {
+        string url = Application.dataPath + "/Files/presentation.json";
         using (StreamReader r = new StreamReader(url))
         {
             string json = r.ReadToEnd();
             Debug.Log(json);
-            Presentation items = Presentation.CreateFromJSON(json);
+
+            items = Presentation.CreateFromJSON(json);
             
-            Debug.Log(items.scenes[0].frames[0].image);
-            Debug.Log(items.scenes[0].frames[1].image);
+//            Debug.Log(items.scenes[0].frames[0].image);
+ //           Debug.Log(items.scenes[0].frames[1].image);
         }
     }
 
-
-
+    public static Presentation GetPresentation() {
+        return items;
+    }
 
 }
+
 
 [System.Serializable]
 public class Presentation
@@ -37,6 +41,7 @@ public class Presentation
     {
         return JsonUtility.FromJson<Presentation>(jsonString);
     }
+
 }
 
 [System.Serializable]

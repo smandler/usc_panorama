@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 // note the modified monobehaviour to support RPC!
 
 public class controller : getReal3D.MonoBehaviourWithRpc {
-	
-	/////////////////////
-	// Mode management //
-	/////////////////////
-	
-	[System.Serializable]
+    public PresentationControl pr = new PresentationControl();
+
+    /////////////////////
+    // Mode management //
+    /////////////////////
+
+    [System.Serializable]
 	public enum modeTypes
 	{
 		Manual,  // allow the user to walk around manually
@@ -444,12 +446,12 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                 {
                     if (sim.playerMode == modeTypes.Manual)
                     {
-
+                        Debug.Log("Should be down");
                     }
 
                     if (sim.playerMode == modeTypes.Menu)
                     {
-
+                        Debug.Log("Should be down");
                     }
 
                     if (sim.playerMode == modeTypes.Tour)
@@ -606,28 +608,40 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 				if(newInput == "I"){
 					sim.menus.GridUI.pos.y += (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
-					sim.input.processed = true;
+                    pr.LoadNextScene(2);
+
+                    sim.input.processed = true;
 				}	
 				
 				// down
 				if(newInput == "K"){
 					sim.menus.GridUI.pos.y -= (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
-					sim.input.processed = true;
+
+                    pr.LoadNextScene(2);
+
+                    sim.input.processed = true;
 				}
 				
 				// left
 				if(newInput == "J"){
 					sim.menus.GridUI.pos.x -= (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
-					sim.input.processed = true;
-				}
+
+                    Debug.Log("Should be left");
+                    pr.LoadNextScene(2);
+
+                    sim.input.processed = true;
+                }
 				
 				// right
 				if(newInput == "Lkey"){
 					sim.menus.GridUI.pos.x += (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
-					sim.input.processed = true;
+
+                    pr.LoadNextScene(2);
+
+                    sim.input.processed = true;
 				}
 				
 				// forward
