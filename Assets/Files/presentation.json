@@ -21,12 +21,22 @@
 			{
 			"image": "park.jpg", 
 			"video": "Test", 
-			"width": 2, 	
+			"width": 4, 	
 			"hight": 1.0 },
         		{
 			"image": "image.jpg", 
 			"video": "Test", 
-			"width": 2, 	
+			"width": 4, 	
+			"hight": 1.0 },
+			{
+			"image": "park.jpg", 
+			"video": "Test", 
+			"width": 4, 	
+			"hight": 1.0 },
+        		{
+			"image": "image.jpg", 
+			"video": "Test", 
+			"width": 4, 	
 			"hight": 1.0 }
 			],
         	"north": 1,
