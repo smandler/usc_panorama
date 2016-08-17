@@ -11,4 +11,7 @@ OnInput:
 Define the scene
 Fill cave's frames with new material
 Adjust width/height
+
 Load the scene 
+	what scene is current
+load scenes with frames

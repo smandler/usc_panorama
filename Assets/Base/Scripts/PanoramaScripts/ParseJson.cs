@@ -36,12 +36,22 @@ public class Presentation
     public string author;
     public string copyright;
     public Scenes[] scenes;
+    public Scenes currentScene;
 
     public static Presentation CreateFromJSON(string jsonString)
     {
         return JsonUtility.FromJson<Presentation>(jsonString);
     }
 
+    public void SetCurrentScene(Scenes current)
+    {
+        currentScene = current;
+    }
+
+    public Scenes GetCurrentScene()
+    {
+        return currentScene;
+    }
 }
 
 [System.Serializable]
@@ -49,10 +59,10 @@ public class Scenes
 {
     public string scene;
     public Frames[] frames;
-    public string north;
-    public string east;
-    public string south;
-    public string west;
+    public int north;
+    public int east;
+    public int south;
+    public int west;
 }
 
 [System.Serializable]

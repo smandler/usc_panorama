@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class PresentationControl : MonoBehaviour
 {
-    public List<Texture2D> imageFrames;
+
 
     public Material Frame1;
     public Material Frame2;
@@ -32,21 +32,13 @@ public class PresentationControl : MonoBehaviour
 
     public void Start()
     {
-        Texture2D im;
-        string url = Application.dataPath + "/Files/image.jpg";
-
-        im = LoadImage(url);
-
-        if (im != null)
-        {
-            Split(im, im.width / 20, im.height);
-        }
+        LoadNewScene(0);
     }
 
-    public void Split(Texture2D image, int width, int height)
+    public void Split(Texture2D image, int width, int height, List<Texture2D> imageFrames)
     {
-        imageFrames.Clear();
-        bool perfectWidth = image.width % width == 0;
+        Debug.Log(imageFrames.Count);
+        bool perfectWidth = true;// image.width % width == 0;
         bool perfectHeight = image.height % height == 0;
 
         int lastWidth = width;
@@ -78,6 +70,12 @@ public class PresentationControl : MonoBehaviour
             }
         }
 
+
+    }
+
+    public void LoadTextures(List<Texture2D> imageFrames)
+    {
+        // load textures
         Frame1.mainTexture = (imageFrames[0]);
         Frame2.mainTexture = (imageFrames[1]);
         Frame3.mainTexture = (imageFrames[2]);
@@ -117,25 +115,114 @@ public class PresentationControl : MonoBehaviour
         return tex;
     }
 
-    public void LoadNextScene(int numScene)
+    public void LoadNewScene(int numScene)
     {
-
+        List<Texture2D> imageFrames;
         Texture2D img;
+        Scenes newScene;
         Presentation present = ParseJson.GetPresentation();
+        string url = "";
+        int frameWidth;
+        int imageWidth = 20;
 
-        Scenes[] newScene = present.scenes;
-        string nextScene = newScene[0].west;
-        string url = Application.dataPath + "/Files/park.jpg";
+        if (numScene == 0)
+            present.SetCurrentScene(present.scenes[0]);
 
-        img = LoadImage(url);
+        // get next scene
+        newScene = GetNextSceneByDirection(numScene, present);
+        
+        // clean frames list
+        imageFrames = new List<Texture2D>();
 
-        if (img != null)
+        // read frames, feel texture
+        for (int i = 0; i < newScene.frames.Length; i++)
         {
-            Split(img, img.width / 20, img.height);
-            Debug.Log("PICTURE");
-            SceneView.RepaintAll();
+            // load image
+            url = Application.dataPath + "/Files/" + newScene.frames[i].image;
+            img = LoadImage(url);
+
+            // frame width if 2 than frame feels 1/2 CAVE, if 4 than 1/4
+            frameWidth = newScene.frames[i].width;
+            switch (frameWidth)
+            {
+                case 1:
+                    // full CAVE
+                    imageWidth = 20;
+                    break;
+                case 2:
+                    // 1/2 CAVE
+                    imageWidth = 10;
+                    break;
+                case 4:
+                    // 1/4 CAVE
+                    imageWidth = 5;
+                    break;
+                default:
+                    // error
+                    print("Incorrect frame number.");
+                    break;
+            }
+
+            if (img != null)
+            {
+                Split(img, img.width / imageWidth, img.height, imageFrames);
+                
+
+            }
         }
+        LoadTextures(imageFrames);
+        SceneView.RepaintAll();
+        present.SetCurrentScene(newScene);
     }
+
+    public Scenes GetNextSceneByDirection(int dir, Presentation pres)
+    {
+        Scenes curScene = null;
+        Scenes nextScene = null;
+        int sceneNum = 0;
+
+        curScene = pres.GetCurrentScene();
+
+        switch (dir)
+        {
+            case 0:
+                // first scene
+                sceneNum = 0;
+                break;
+            case 4:
+                sceneNum = curScene.east;
+                break;
+            case 3:
+                sceneNum = curScene.west;
+                break;
+            case 2:
+                sceneNum = curScene.south;
+                break;
+            case 1:
+                sceneNum = curScene.north;
+                break;
+            default:
+                print("Incorrect scene number.");
+                break;
+        }
+
+        if (sceneNum > 0)
+            sceneNum--;
+
+        try
+        { 
+            nextScene = pres.scenes[sceneNum];
+        }
+        catch (Exception e)
+        {
+            print(e.Message);
+            // if no scene next is current one
+            nextScene = curScene;
+        }
+
+        return nextScene;
+    }
+
 }
 
 

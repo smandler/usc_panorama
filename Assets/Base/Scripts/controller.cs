@@ -608,7 +608,9 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 				if(newInput == "I"){
 					sim.menus.GridUI.pos.y += (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
-                    pr.LoadNextScene(2);
+
+                    //load north scene
+                    pr.LoadNewScene(1);
 
                     sim.input.processed = true;
 				}	
@@ -618,7 +620,8 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					sim.menus.GridUI.pos.y -= (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
 
-                    pr.LoadNextScene(2);
+                    //load south scene
+                    pr.LoadNewScene(2);
 
                     sim.input.processed = true;
 				}
@@ -628,8 +631,8 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					sim.menus.GridUI.pos.x -= (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
 
-                    Debug.Log("Should be left");
-                    pr.LoadNextScene(2);
+                    //load west scene
+                    pr.LoadNewScene(3);
 
                     sim.input.processed = true;
                 }
@@ -639,7 +642,8 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					sim.menus.GridUI.pos.x += (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
 
-                    pr.LoadNextScene(2);
+                    //load east scene
+                    pr.LoadNewScene(4);
 
                     sim.input.processed = true;
 				}
