@@ -36,7 +36,7 @@ public class Presentation
     public string author;
     public string copyright;
     public Scenes[] scenes;
-    public Scenes currentScene;
+    private Scenes currentScene;
 
     public static Presentation CreateFromJSON(string jsonString)
     {

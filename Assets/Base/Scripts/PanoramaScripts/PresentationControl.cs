@@ -37,7 +37,6 @@ public class PresentationControl : MonoBehaviour
 
     public void Split(Texture2D image, int width, int height, List<Texture2D> imageFrames)
     {
-        Debug.Log(imageFrames.Count);
         bool perfectWidth = true;// image.width % width == 0;
         bool perfectHeight = image.height % height == 0;
 
@@ -69,8 +68,6 @@ public class PresentationControl : MonoBehaviour
                 imageFrames.Add(g);
             }
         }
-
-
     }
 
     public void LoadTextures(List<Texture2D> imageFrames)
@@ -97,6 +94,8 @@ public class PresentationControl : MonoBehaviour
         Frame18.mainTexture = (imageFrames[17]);
         Frame19.mainTexture = (imageFrames[18]);
         Frame20.mainTexture = (imageFrames[19]);
+
+        Resources.UnloadUnusedAssets(); // clean
     }
 
     public Texture2D LoadImage(string filePath)
@@ -115,6 +114,7 @@ public class PresentationControl : MonoBehaviour
         return tex;
     }
 
+
     public void LoadNewScene(int numScene)
     {
         List<Texture2D> imageFrames;
@@ -125,6 +125,9 @@ public class PresentationControl : MonoBehaviour
         int frameWidth;
         int imageWidth = 20;
 
+        Resources.UnloadUnusedAssets(); // clean
+        AutoFade.LoadScene(1, 1, 1, Color.green);
+
         if (numScene == 0)
             present.SetCurrentScene(present.scenes[0]);
 
@@ -134,8 +137,11 @@ public class PresentationControl : MonoBehaviour
         // clean frames list
         imageFrames = new List<Texture2D>();
 
+        int framesLength = 0;
+        framesLength = newScene.frames.Length;
+
         // read frames, feel texture
-        for (int i = 0; i < newScene.frames.Length; i++)
+        for (int i = 0; i < framesLength; i++)
         {
             // load image
             url = Application.dataPath + "/Files/" + newScene.frames[i].image;
@@ -143,6 +149,7 @@ public class PresentationControl : MonoBehaviour
 
             // frame width if 2 than frame feels 1/2 CAVE, if 4 than 1/4
             frameWidth = newScene.frames[i].width;
+
             switch (frameWidth)
             {
                 case 1:
@@ -166,12 +173,12 @@ public class PresentationControl : MonoBehaviour
             if (img != null)
             {
                 Split(img, img.width / imageWidth, img.height, imageFrames);
-                
-
             }
+
+            Destroy(img);
         }
-        LoadTextures(imageFrames);
-        SceneView.RepaintAll();
+
+        LoadTextures(imageFrames);       
         present.SetCurrentScene(newScene);
     }
 

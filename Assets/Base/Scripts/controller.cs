@@ -446,12 +446,75 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                 {
                     if (sim.playerMode == modeTypes.Manual)
                     {
-                        Debug.Log("Should be down");
+                        //load south scene
+                        pr.LoadNewScene(2);
                     }
 
                     if (sim.playerMode == modeTypes.Menu)
                     {
-                        Debug.Log("Should be down");
+                        //load south scene
+                        pr.LoadNewScene(2);
+                    }
+
+                    if (sim.playerMode == modeTypes.Tour)
+                    {
+                        /*
+                        if (sim.tours.GuideCurrentSpeed > -2)
+                        {
+                            sim.tours.GuideCurrentSpeed -= 1;
+                            setPlaybackIndicator(sim.tours.GuideCurrentSpeed);
+                            tourAdjustSpeed(sim.tours.GuideCurrentId, sim.tours.GuideCurrentSpeed);
+                        }
+                        */
+                    }
+
+                    // mark one shot as processed to prevent multiple triggerings of the associated event
+                    sim.input.processed = true;
+                }
+
+
+                if (newInput == "L")
+                {
+                    if (sim.playerMode == modeTypes.Manual)
+                    {
+                        //load south scene
+                        pr.LoadNewScene(2);
+                    }
+
+                    if (sim.playerMode == modeTypes.Menu)
+                    {
+                        //load west scene
+                        pr.LoadNewScene(3);
+                    }
+
+                    if (sim.playerMode == modeTypes.Tour)
+                    {
+                        /*
+                        if (sim.tours.GuideCurrentSpeed > -2)
+                        {
+                            sim.tours.GuideCurrentSpeed -= 1;
+                            setPlaybackIndicator(sim.tours.GuideCurrentSpeed);
+                            tourAdjustSpeed(sim.tours.GuideCurrentId, sim.tours.GuideCurrentSpeed);
+                        }
+                        */
+                    }
+
+                    // mark one shot as processed to prevent multiple triggerings of the associated event
+                    sim.input.processed = true;
+                }
+
+                if (newInput == "R")
+                {
+                    if (sim.playerMode == modeTypes.Manual)
+                    {
+                        //load east scene
+                        pr.LoadNewScene(2);
+                    }
+
+                    if (sim.playerMode == modeTypes.Menu)
+                    {
+                        //load south scene
+                        pr.LoadNewScene(4);
                     }
 
                     if (sim.playerMode == modeTypes.Tour)
@@ -474,12 +537,14 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                 {
                     if(sim.playerMode == modeTypes.Manual)
                     {
-
+                        //load north scene
+                        pr.LoadNewScene(1);
                     }
 
                     if(sim.playerMode == modeTypes.Menu)
                     {
-
+                        //load north scene
+                        pr.LoadNewScene(1);
                     }
 
                     if (sim.playerMode == modeTypes.Tour)
