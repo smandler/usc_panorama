@@ -8,6 +8,7 @@ public class AutoFade : MonoBehaviour
     private string m_LevelName = "";
     private int m_LevelIndex = 0;
     private bool fading = false;
+    public GameObject fadeSphere;
 
     private static AutoFade Instance
     {
@@ -34,38 +35,42 @@ public class AutoFade : MonoBehaviour
 
     private void DrawQuad(Color aColor, float aAlpha)
     {
-        GUITexture tex = instance.gameObject.GetComponent<GUITexture>();
-        if (tex == null)
-        {
-            tex = instance.gameObject.AddComponent<GUITexture>();
-            instance.transform.localScale = Vector3.zero;
-            Texture2D tex2d = new Texture2D(1, 1);
-            tex2d.SetPixels(new Color[1] { Color.white });
-            tex2d.Apply();
-            tex.texture = tex2d;
-        }
-        tex.pixelInset = new Rect(0, 0, Screen.width, Screen.height);
-        tex.color = new Color(aColor.r, aColor.g, aColor.b, aAlpha);
+        /*  GUITexture tex = instance.gameObject.GetComponent<GUITexture>();
+          if (tex == null)
+          {
+              tex = instance.gameObject.AddComponent<GUITexture>();
+              instance.transform.localScale = Vector3.zero;
+              Texture2D tex2d = new Texture2D(1, 1);
+              tex2d.SetPixels(new Color[1] { Color.white });
+              tex2d.Apply();
+              tex.texture = tex2d;
+          }
+          tex.pixelInset = new Rect(0, 0, Screen.width, Screen.height);
+          tex.color = new Color(aColor.r, aColor.g, aColor.b, aAlpha);*/
+        Color colorHold = fadeSphere.gameObject.GetComponent<Renderer>().material.color;
+        colorHold.a = 0;
+        fadeSphere.gameObject.GetComponent<Renderer>().material.color = colorHold;
 
     }
 
     private IEnumerator Fade(float aFadeOutTime, float aFadeInTime, Color aColor)
     {
-        float t = 0.0f;
-        while (t < 1.0f)
-        {
-            yield return new WaitForEndOfFrame();
-            t = Mathf.Clamp01(t + Time.deltaTime / aFadeOutTime);
-            DrawQuad(aColor, t);
-        }
+              float t = 0.0f;
+              while (t < 1.0f)
+              {
+                  yield return new WaitForEndOfFrame();
+                  t = Mathf.Clamp01(t + Time.deltaTime / aFadeOutTime);
+                  DrawQuad(aColor, t);
+              }
 
-        while (t > 0.0f)
-        {
-            yield return new WaitForEndOfFrame();
-            t = Mathf.Clamp01(t - Time.deltaTime / aFadeInTime);
-            DrawQuad(aColor, t);
-        }
-        fading = false;
+              while (t > 0.0f)
+              {
+                  yield return new WaitForEndOfFrame();
+                  t = Mathf.Clamp01(t - Time.deltaTime / aFadeInTime);
+                  DrawQuad(aColor, t);
+              }
+
+              fading = false;
     }
 
     private void StartFade(float aFadeOutTime, float aFadeInTime, Color aColor)

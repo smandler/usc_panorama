@@ -68,6 +68,7 @@ public class Scenes
 [System.Serializable]
 public class Frames
 {
+    public int source;
     public string image;
     public string video;
     public int width;

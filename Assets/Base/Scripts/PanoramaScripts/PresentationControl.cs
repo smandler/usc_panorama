@@ -2,7 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using System;
-using UnityEditor;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PresentationControl : MonoBehaviour
 {
@@ -29,10 +30,13 @@ public class PresentationControl : MonoBehaviour
     public Material Frame19;
     public Material Frame20;
 
+    private WWW ww;
+    private List<Texture2D> imageFrames;
 
     public void Start()
     {
         LoadNewScene(0);
+        LoadTextures();
     }
 
     public void Split(Texture2D image, int width, int height, List<Texture2D> imageFrames)
@@ -70,7 +74,7 @@ public class PresentationControl : MonoBehaviour
         }
     }
 
-    public void LoadTextures(List<Texture2D> imageFrames)
+    public void LoadTextures()
     {
         // load textures
         Frame1.mainTexture = (imageFrames[0]);
@@ -95,6 +99,7 @@ public class PresentationControl : MonoBehaviour
         Frame19.mainTexture = (imageFrames[18]);
         Frame20.mainTexture = (imageFrames[19]);
 
+     //   SceneManager.LoadScene(1);
         Resources.UnloadUnusedAssets(); // clean
     }
 
@@ -114,10 +119,17 @@ public class PresentationControl : MonoBehaviour
         return tex;
     }
 
+    public IEnumerator LoadImageFromWWW(string url)
+    {
+        ww = new WWW(url);
+        // wait until downloaded...
+        while (!ww.isDone) { }
+        yield return ww;
+    }
 
     public void LoadNewScene(int numScene)
     {
-        List<Texture2D> imageFrames;
+
         Texture2D img;
         Scenes newScene;
         Presentation present = ParseJson.GetPresentation();
@@ -125,8 +137,8 @@ public class PresentationControl : MonoBehaviour
         int frameWidth;
         int imageWidth = 20;
 
+
         Resources.UnloadUnusedAssets(); // clean
-        AutoFade.LoadScene(1, 1, 1, Color.green);
 
         if (numScene == 0)
             present.SetCurrentScene(present.scenes[0]);
@@ -143,9 +155,21 @@ public class PresentationControl : MonoBehaviour
         // read frames, feel texture
         for (int i = 0; i < framesLength; i++)
         {
+            img = null;
             // load image
-            url = Application.dataPath + "/Files/" + newScene.frames[i].image;
-            img = LoadImage(url);
+            int source = newScene.frames[i].source;
+
+            if (source == 1)
+            {
+                url = Application.dataPath + "/Files/" + newScene.frames[i].image;
+                img = LoadImage(url);
+            }
+            else if (source == 2) // load from WWW
+            {
+                url = newScene.frames[i].image;
+                StartCoroutine("LoadImageFromWWW", url);
+                img = ww.texture;
+            }
 
             // frame width if 2 than frame feels 1/2 CAVE, if 4 than 1/4
             frameWidth = newScene.frames[i].width;
@@ -178,9 +202,10 @@ public class PresentationControl : MonoBehaviour
             Destroy(img);
         }
 
-        LoadTextures(imageFrames);       
+        //LoadTextures();       
         present.SetCurrentScene(newScene);
     }
+
 
     public Scenes GetNextSceneByDirection(int dir, Presentation pres)
     {

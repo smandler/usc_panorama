@@ -6,6 +6,7 @@
 	        "scene": "main_scene",
         	"frames":[
 			{
+			"source": 1, 
 			"image": "image.jpg", 
 			"video": "Test", 
 			"width": 1, 	
@@ -19,22 +20,41 @@
 	        "scene": "second_scene",
         	"frames":[
 			{
-			"image": "park.jpg", 
+			"source": 2, 
+			"image": "https://www.universitiesaustralia.edu.au/Images/UserUploadedImages/387/USClogo.jpg",
 			"video": "Test", 
-			"width": 4, 	
+			"width": 2, 	
 			"hight": 1.0 },
         		{
+			"source": 1, 
 			"image": "image.jpg", 
 			"video": "Test", 
-			"width": 4, 	
+			"width": 2, 	
+			"hight": 1.0 }
+			],
+        	"north": 1,
+        	"east": 2,
+        	"south": 3,
+        	"west": 4	
+		},
+		{
+	        "scene": "third_scene",
+        	"frames":[
+			{
+			"source": 1, 
+			"image": "image1.jpg", 
+			"video": "Test", 
+			"width": 2, 	
 			"hight": 1.0 },
 			{
-			"image": "park.jpg", 
+			"source": 1, 
+			"image": "image3.jpg", 
 			"video": "Test", 
 			"width": 4, 	
 			"hight": 1.0 },
         		{
-			"image": "image.jpg", 
+			"source": 1, 
+			"image": "image2.jpg", 
 			"video": "Test", 
 			"width": 4, 	
 			"hight": 1.0 }

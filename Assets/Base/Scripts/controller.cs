@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 // note the modified monobehaviour to support RPC!
 
@@ -250,7 +251,9 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 	}
 	
 	public simStruct sim;
-	 
+
+    public GameObject fadeSphere;
+
 	///////////////
 	//           //
 	//   Start   //
@@ -446,14 +449,12 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                 {
                     if (sim.playerMode == modeTypes.Manual)
                     {
-                        //load south scene
-                        pr.LoadNewScene(2);
+                        changePresentation(2);
                     }
 
                     if (sim.playerMode == modeTypes.Menu)
                     {
-                        //load south scene
-                        pr.LoadNewScene(2);
+                        changePresentation(2);
                     }
 
                     if (sim.playerMode == modeTypes.Tour)
@@ -467,6 +468,9 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                         }
                         */
                     }
+
+                    //load south scene
+                    changePresentation(2);
 
                     // mark one shot as processed to prevent multiple triggerings of the associated event
                     sim.input.processed = true;
@@ -477,14 +481,12 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                 {
                     if (sim.playerMode == modeTypes.Manual)
                     {
-                        //load south scene
-                        pr.LoadNewScene(2);
+                        changePresentation(3);
                     }
 
                     if (sim.playerMode == modeTypes.Menu)
                     {
-                        //load west scene
-                        pr.LoadNewScene(3);
+                        changePresentation(3);
                     }
 
                     if (sim.playerMode == modeTypes.Tour)
@@ -498,6 +500,9 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                         }
                         */
                     }
+
+                    //load west scene
+                    changePresentation(3);
 
                     // mark one shot as processed to prevent multiple triggerings of the associated event
                     sim.input.processed = true;
@@ -507,14 +512,12 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                 {
                     if (sim.playerMode == modeTypes.Manual)
                     {
-                        //load east scene
-                        pr.LoadNewScene(2);
+                        changePresentation(4);
                     }
 
                     if (sim.playerMode == modeTypes.Menu)
                     {
-                        //load south scene
-                        pr.LoadNewScene(4);
+                        changePresentation(4);
                     }
 
                     if (sim.playerMode == modeTypes.Tour)
@@ -529,6 +532,9 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                         */
                     }
 
+                    //load south scene
+                    changePresentation(4);
+
                     // mark one shot as processed to prevent multiple triggerings of the associated event
                     sim.input.processed = true;
                 }
@@ -537,14 +543,12 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                 {
                     if(sim.playerMode == modeTypes.Manual)
                     {
-                        //load north scene
-                        pr.LoadNewScene(1);
+                        changePresentation(1);
                     }
 
                     if(sim.playerMode == modeTypes.Menu)
                     {
-                        //load north scene
-                        pr.LoadNewScene(1);
+                        changePresentation(1);
                     }
 
                     if (sim.playerMode == modeTypes.Tour)
@@ -562,6 +566,9 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                     // terrainFlipbookIndex++;
                     // if (terrainFlipbookIndex > terrainFlipbook.Length) { terrainFlipbookIndex = 0; }
                     // terrainTarget.terrainData.SetDetailLayer()
+
+                    //load north scene
+                    changePresentation(1);
 
                     // mark one shot as processed to prevent multiple triggerings of the associated event
                     sim.input.processed = true;
@@ -675,7 +682,7 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					broadcastGridUI_transforms();
 
                     //load north scene
-                    pr.LoadNewScene(1);
+                    changePresentation(1);
 
                     sim.input.processed = true;
 				}	
@@ -686,7 +693,7 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					broadcastGridUI_transforms();
 
                     //load south scene
-                    pr.LoadNewScene(2);
+                    changePresentation(2);
 
                     sim.input.processed = true;
 				}
@@ -697,7 +704,7 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					broadcastGridUI_transforms();
 
                     //load west scene
-                    pr.LoadNewScene(3);
+                    changePresentation(3);
 
                     sim.input.processed = true;
                 }
@@ -708,7 +715,7 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					broadcastGridUI_transforms();
 
                     //load east scene
-                    pr.LoadNewScene(4);
+                    changePresentation(4);
 
                     sim.input.processed = true;
 				}
@@ -1320,7 +1327,85 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 			}
 		}
 	}
-	
+
+    //////////////////////////
+    //                      //
+    //  changePresentation  //
+    //                      //
+    //////////////////////////
+
+    void changePresentation(int direction)
+    {
+      //  fadeScene();
+        
+        changeScene(direction);
+    }
+
+    void fadeScene()
+    {
+        if (sim.cameraMode == cameraTypes.Cave)
+        {
+            getReal3D.RpcManager.call("fadeScene_rpc");
+        }
+        else
+        {
+            fadeScene_rpc();
+        }
+    }
+
+    [getReal3D.RPC]
+    void fadeScene_rpc()
+    {
+
+    }
+
+    void changeScene(int dir)
+    {
+        if (sim.cameraMode == cameraTypes.Cave)
+        {
+            getReal3D.RpcManager.call("changeScene_rpc", dir);
+        }
+        else
+        {
+            changeScene_rpc(dir);
+        }
+    }
+
+    [getReal3D.RPC]
+    void changeScene_rpc(int dir)
+    {
+        // green screen
+        // AutoFade.LoadScene(1, 10, 10, Color.green);
+     //   SceneManager.LoadScene(0);
+        // setFade_rpc(88);
+        pr.LoadNewScene(dir);
+
+        // load new textures
+        pr.LoadTextures();
+    //    SceneManager.LoadScene(1);
+
+    }
+
+
+    void setFadeInOut(float argFade)
+    {
+        if (sim.cameraMode == cameraTypes.Cave)
+        {
+            getReal3D.RpcManager.call("rpc_tourManager_setFade", argFade);
+        }
+        else
+        {
+            setFade_rpc(argFade);
+        }
+    }
+
+    public void setFade_rpc(float argFade)
+    {
+        Color colorHold = fadeSphere.gameObject.GetComponent<Renderer>().material.color;
+        colorHold.a = argFade;
+        fadeSphere.gameObject.GetComponent<Renderer>().material.color = colorHold;
+    }
+
     //////////////////
     //              //
     //  toggleMenu  //
