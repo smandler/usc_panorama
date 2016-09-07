@@ -6,6 +6,7 @@
 	        "scene": "main_scene",
 		"sound_source": 1,
 		"sound": "cartoon001.wav",
+		"angle": 180,
         	"frames":[
 			{
 			"source": 1, 
@@ -22,6 +23,7 @@
 	        "scene": "second_scene",
 		"sound_source": 2,
 		"sound": "http://static1.grsites.com/archive/sounds/cartoon/cartoon002.wav",
+		"angle": 90,
         	"frames":[
 			{
 			"source": 2, 

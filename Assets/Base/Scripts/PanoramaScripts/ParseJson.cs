@@ -59,6 +59,7 @@ public class Scenes
 {
     public string scene;
     public int sound_source;
+    public int angle;
     public string sound;
     public Frames[] frames;
     public int north;

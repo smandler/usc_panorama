@@ -30,8 +30,9 @@ public class PresentationControl : MonoBehaviour
     public Material Frame19;
     public Material Frame20;
 
-    private WWW ww;
-    private WWW www;
+    private WWW www_img;
+    private WWW www_sound;
+    private int sound_angle;
     private List<Texture2D> imageFrames;
 
     public void Start()
@@ -122,22 +123,23 @@ public class PresentationControl : MonoBehaviour
 
     public IEnumerator LoadFromWWW(string url)
     {
-        ww = new WWW(url);
+        www_img = new WWW(url);
         // wait until downloaded...
-        while (!ww.isDone) { }
-        yield return ww;
+        while (!www_img.isDone) { }
+        yield return www_img;
     }
 
     public IEnumerator LoadSoundWWW(string url)
     {
-        www = new WWW(url);
+        www_sound = new WWW(url);
 
-        while (!www.isDone) { }
-        yield return www;
+        while (!www_sound.isDone) { }
+        yield return www_sound;
 
-        AudioClip presentationClip = www.GetAudioClip(true, true, AudioType.WAV);
+        AudioClip presentationClip = www_sound.GetAudioClip(true, true, AudioType.WAV);
         
         sound.GetComponent<AudioSource>().clip = presentationClip;
+        sound.GetComponent<AudioSource>().spread = sound_angle;
         sound.GetComponent<AudioSource>().Play();
     }
 
@@ -172,6 +174,8 @@ public class PresentationControl : MonoBehaviour
             url = newScene.sound;
 
         }
+
+        sound_angle = newScene.angle;
         StartCoroutine("LoadSoundWWW", url);
         
         
@@ -200,7 +204,7 @@ public class PresentationControl : MonoBehaviour
       
             }
             StartCoroutine("LoadFromWWW", url);
-            img = ww.texture;
+            img = www_img.texture;
 
             // frame width if 2 than frame feels 1/2 CAVE, if 4 than 1/4
             frameWidth = newScene.frames[i].width;
