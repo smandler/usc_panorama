@@ -7,7 +7,7 @@ using System.Collections;
 
 public class PresentationControl : MonoBehaviour
 {
-
+    public GameObject sound;
 
     public Material Frame1;
     public Material Frame2;
@@ -31,6 +31,7 @@ public class PresentationControl : MonoBehaviour
     public Material Frame20;
 
     private WWW ww;
+    private WWW www;
     private List<Texture2D> imageFrames;
 
     public void Start()
@@ -119,12 +120,25 @@ public class PresentationControl : MonoBehaviour
         return tex;
     }
 
-    public IEnumerator LoadImageFromWWW(string url)
+    public IEnumerator LoadFromWWW(string url)
     {
         ww = new WWW(url);
         // wait until downloaded...
         while (!ww.isDone) { }
         yield return ww;
+    }
+
+    public IEnumerator LoadSoundWWW(string url)
+    {
+        www = new WWW(url);
+
+        while (!www.isDone) { }
+        yield return www;
+
+        AudioClip presentationClip = www.GetAudioClip(true, true, AudioType.WAV);
+        
+        sound.GetComponent<AudioSource>().clip = presentationClip;
+        sound.GetComponent<AudioSource>().Play();
     }
 
     public void LoadNewScene(int numScene)
@@ -145,7 +159,23 @@ public class PresentationControl : MonoBehaviour
 
         // get next scene
         newScene = GetNextSceneByDirection(numScene, present);
+
+        // load scene sound
+        int sound_source = newScene.sound_source;
+        if (sound_source == 1)
+        {
+            url = "file://" + Application.dataPath + "/Files/" + newScene.sound;
+            //  img = LoadImage(url);
+        }
+        else if (sound_source == 2) // load from WWW
+        {
+            url = newScene.sound;
+
+        }
+        StartCoroutine("LoadSoundWWW", url);
         
+        
+
         // clean frames list
         imageFrames = new List<Texture2D>();
 
@@ -161,15 +191,16 @@ public class PresentationControl : MonoBehaviour
 
             if (source == 1)
             {
-                url = Application.dataPath + "/Files/" + newScene.frames[i].image;
-                img = LoadImage(url);
+                url = "file://" + Application.dataPath + "/Files/" + newScene.frames[i].image;
+              //  img = LoadImage(url);
             }
             else if (source == 2) // load from WWW
             {
                 url = newScene.frames[i].image;
-                StartCoroutine("LoadImageFromWWW", url);
-                img = ww.texture;
+      
             }
+            StartCoroutine("LoadFromWWW", url);
+            img = ww.texture;
 
             // frame width if 2 than frame feels 1/2 CAVE, if 4 than 1/4
             frameWidth = newScene.frames[i].width;

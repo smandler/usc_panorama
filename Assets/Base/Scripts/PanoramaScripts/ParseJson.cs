@@ -58,6 +58,8 @@ public class Presentation
 public class Scenes
 {
     public string scene;
+    public int sound_source;
+    public string sound;
     public Frames[] frames;
     public int north;
     public int east;

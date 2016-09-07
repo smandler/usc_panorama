@@ -4,6 +4,8 @@
 	"scenes":[
 		{
 	        "scene": "main_scene",
+		"sound_source": 1,
+		"sound": "cartoon001.wav",
         	"frames":[
 			{
 			"source": 1, 
@@ -18,6 +20,8 @@
         	"west": 2},
 		{
 	        "scene": "second_scene",
+		"sound_source": 2,
+		"sound": "http://static1.grsites.com/archive/sounds/cartoon/cartoon002.wav",
         	"frames":[
 			{
 			"source": 2, 
