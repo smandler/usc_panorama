@@ -8,6 +8,7 @@ using System.Collections;
 public class PresentationControl : MonoBehaviour
 {
     public GameObject sound;
+    public GameObject vFrame;
 
     public Material Frame1;
     public Material Frame2;
@@ -30,8 +31,11 @@ public class PresentationControl : MonoBehaviour
     public Material Frame19;
     public Material Frame20;
 
+    public Material VideoFrame;
+
     private WWW www_img;
     private WWW www_sound;
+    private WWW www_video;
     private int sound_angle;
     private List<Texture2D> imageFrames;
 
@@ -143,6 +147,25 @@ public class PresentationControl : MonoBehaviour
         sound.GetComponent<AudioSource>().Play();
     }
 
+    public IEnumerator LoadVideoWWW(string url)
+    {
+        www_video = new WWW(url);
+        
+
+        while (!www_video.isDone) { }
+        yield return www_video;
+
+        MovieTexture video = www_video.movie;
+
+        vFrame.GetComponent<Renderer>().material.mainTexture = video;
+        vFrame.GetComponent<AudioSource>().clip = video.audioClip;
+
+        video.Play();
+
+        vFrame.GetComponent<AudioSource>().Play();
+      //
+    }
+
     public void LoadNewScene(int numScene)
     {
 
@@ -150,6 +173,7 @@ public class PresentationControl : MonoBehaviour
         Scenes newScene;
         Presentation present = ParseJson.GetPresentation();
         string url = "";
+        string urlVideo = "";
         int frameWidth;
         int imageWidth = 20;
 
@@ -190,21 +214,28 @@ public class PresentationControl : MonoBehaviour
         for (int i = 0; i < framesLength; i++)
         {
             img = null;
+            urlVideo = "";
             // load image
             int source = newScene.frames[i].source;
 
             if (source == 1)
             {
                 url = "file://" + Application.dataPath + "/Files/" + newScene.frames[i].image;
-              //  img = LoadImage(url);
+                if (newScene.frames[i].video != "")
+                    urlVideo = "file://" + Application.dataPath + "/Files/" + newScene.frames[i].video;
             }
             else if (source == 2) // load from WWW
             {
                 url = newScene.frames[i].image;
-      
+                urlVideo = newScene.frames[i].video;
+
             }
             StartCoroutine("LoadFromWWW", url);
             img = www_img.texture;
+
+            Debug.Log(urlVideo);
+            if (urlVideo != "")
+                StartCoroutine("LoadVideoWWW", urlVideo);
 
             // frame width if 2 than frame feels 1/2 CAVE, if 4 than 1/4
             frameWidth = newScene.frames[i].width;

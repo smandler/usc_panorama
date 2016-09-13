@@ -73,7 +73,7 @@ public class Frames
 {
     public int source;
     public string image;
-    public string video;
+    public string video = "";
     public int width;
     public float hight;
 }

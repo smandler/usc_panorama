@@ -5,13 +5,13 @@
 		{
 	        "scene": "main_scene",
 		"sound_source": 1,
-		"sound": "cartoon001.wav",
+		"sound": "River_Flows_In_You_-_Yiruma_Piano_Tutorial_Synthes.wav",
 		"angle": 180,
         	"frames":[
 			{
 			"source": 1, 
 			"image": "image.jpg", 
-			"video": "Test", 
+			"video": "Funny_Cartoon.ogg", 
 			"width": 1, 	
 			"hight": 1.0 }
 			],
@@ -21,20 +21,20 @@
         	"west": 2},
 		{
 	        "scene": "second_scene",
-		"sound_source": 2,
-		"sound": "http://static1.grsites.com/archive/sounds/cartoon/cartoon002.wav",
+		"sound_source": 1,
+		"sound": "Emotional_Piano_Music_-_Last_Leaf_Falls_Synthesia_.wav",
 		"angle": 90,
         	"frames":[
 			{
 			"source": 2, 
 			"image": "https://www.universitiesaustralia.edu.au/Images/UserUploadedImages/387/USClogo.jpg",
-			"video": "Test", 
+			"video": "https://becunningandfulloftricks.files.wordpress.com/2013/04/hedgehog_in_the_fog.ogg", 
 			"width": 2, 	
 			"hight": 1.0 },
         		{
 			"source": 1, 
 			"image": "image.jpg", 
-			"video": "Test", 
+			"video": "", 
 			"width": 2, 	
 			"hight": 1.0 }
 			],
@@ -49,19 +49,19 @@
 			{
 			"source": 1, 
 			"image": "image1.jpg", 
-			"video": "Test", 
+			"video": "", 
 			"width": 2, 	
 			"hight": 1.0 },
 			{
 			"source": 1, 
 			"image": "image3.jpg", 
-			"video": "Test", 
+			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 },
         		{
 			"source": 1, 
 			"image": "image2.jpg", 
-			"video": "Test", 
+			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 }
 			],
