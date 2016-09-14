@@ -38,6 +38,7 @@ public class PresentationControl : MonoBehaviour
     private WWW www_video;
     private int sound_angle;
     private List<Texture2D> imageFrames;
+    private Boolean isVideo = false;
 
     public void Start()
     {
@@ -91,19 +92,35 @@ public class PresentationControl : MonoBehaviour
         Frame6.mainTexture = (imageFrames[5]);
         Frame7.mainTexture = (imageFrames[6]);
         Frame8.mainTexture = (imageFrames[7]);
-        Frame9.mainTexture = (imageFrames[8]);
-        Frame10.mainTexture = (imageFrames[9]);
 
-        Frame11.mainTexture = (imageFrames[10]);
-        Frame12.mainTexture = (imageFrames[11]);
-        Frame13.mainTexture = (imageFrames[12]);
-        Frame14.mainTexture = (imageFrames[13]);
-        Frame15.mainTexture = (imageFrames[14]);
-        Frame16.mainTexture = (imageFrames[15]);
-        Frame17.mainTexture = (imageFrames[16]);
-        Frame18.mainTexture = (imageFrames[17]);
-        Frame19.mainTexture = (imageFrames[18]);
-        Frame20.mainTexture = (imageFrames[19]);
+        // if there is a video frame, show videoFrame
+        if (isVideo)
+        {
+            vFrame.SetActive(true);
+            Frame13.mainTexture = (imageFrames[8]);
+            Frame14.mainTexture = (imageFrames[9]);
+            Frame15.mainTexture = (imageFrames[10]);
+            Frame16.mainTexture = (imageFrames[11]);
+            Frame17.mainTexture = (imageFrames[12]);
+            Frame18.mainTexture = (imageFrames[13]);
+            Frame19.mainTexture = (imageFrames[14]);
+            Frame20.mainTexture = (imageFrames[15]);
+        } else
+        {
+            vFrame.SetActive(false);
+            Frame9.mainTexture = (imageFrames[8]);
+            Frame10.mainTexture = (imageFrames[9]);
+            Frame11.mainTexture = (imageFrames[10]);
+            Frame12.mainTexture = (imageFrames[11]);
+            Frame13.mainTexture = (imageFrames[12]);
+            Frame14.mainTexture = (imageFrames[13]);
+            Frame15.mainTexture = (imageFrames[14]);
+            Frame16.mainTexture = (imageFrames[15]);
+            Frame17.mainTexture = (imageFrames[16]);
+            Frame18.mainTexture = (imageFrames[17]);
+            Frame19.mainTexture = (imageFrames[18]);
+            Frame20.mainTexture = (imageFrames[19]);
+        }
 
      //   SceneManager.LoadScene(1);
         Resources.UnloadUnusedAssets(); // clean
@@ -149,9 +166,12 @@ public class PresentationControl : MonoBehaviour
 
     public IEnumerator LoadVideoWWW(string url)
     {
+        // stop playing sounds
+        sound.GetComponent<AudioSource>().Stop();
+
+        //load videoj
         www_video = new WWW(url);
         
-
         while (!www_video.isDone) { }
         yield return www_video;
 
@@ -161,7 +181,6 @@ public class PresentationControl : MonoBehaviour
         vFrame.GetComponent<AudioSource>().clip = video.audioClip;
 
         video.Play();
-
         vFrame.GetComponent<AudioSource>().Play();
       //
     }
@@ -179,6 +198,10 @@ public class PresentationControl : MonoBehaviour
 
 
         Resources.UnloadUnusedAssets(); // clean
+
+        // vFrame is not active
+        isVideo = false;
+        vFrame.SetActive(false);
 
         if (numScene == 0)
             present.SetCurrentScene(present.scenes[0]);
@@ -200,9 +223,7 @@ public class PresentationControl : MonoBehaviour
         }
 
         sound_angle = newScene.angle;
-        StartCoroutine("LoadSoundWWW", url);
-        
-        
+        StartCoroutine("LoadSoundWWW", url);      
 
         // clean frames list
         imageFrames = new List<Texture2D>();
@@ -233,9 +254,14 @@ public class PresentationControl : MonoBehaviour
             StartCoroutine("LoadFromWWW", url);
             img = www_img.texture;
 
-            Debug.Log(urlVideo);
+            // load video
             if (urlVideo != "")
+            {
+                isVideo = true;
+                vFrame.SetActive(true);
                 StartCoroutine("LoadVideoWWW", urlVideo);
+            }
+                
 
             // frame width if 2 than frame feels 1/2 CAVE, if 4 than 1/4
             frameWidth = newScene.frames[i].width;
@@ -252,7 +278,13 @@ public class PresentationControl : MonoBehaviour
                     break;
                 case 4:
                     // 1/4 CAVE
-                    imageWidth = 5;
+                    if (isVideo)
+                    {
+                        imageWidth = 4;
+                    } else
+                    {
+                        imageWidth = 5;
+                    }                  
                     break;
                 default:
                     // error

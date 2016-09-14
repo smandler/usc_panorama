@@ -10,9 +10,27 @@
         	"frames":[
 			{
 			"source": 1, 
+			"image": "image1.jpg", 
+			"video": "", 
+			"width": 4, 	
+			"hight": 1.0 },
+			{
+			"source": 1, 
+			"image": "image1.jpg", 
+			"video": "", 
+			"width": 4, 	
+			"hight": 1.0 },
+			{
+			"source": 1, 
+			"image": "image1.jpg", 
+			"video": "", 
+			"width": 4, 	
+			"hight": 1.0 },
+			{
+			"source": 1, 
 			"image": "image.jpg", 
 			"video": "Funny_Cartoon.ogg", 
-			"width": 1, 	
+			"width": 4, 	
 			"hight": 1.0 }
 			],
         	"north": 1,
@@ -28,14 +46,26 @@
 			{
 			"source": 2, 
 			"image": "https://www.universitiesaustralia.edu.au/Images/UserUploadedImages/387/USClogo.jpg",
-			"video": "https://becunningandfulloftricks.files.wordpress.com/2013/04/hedgehog_in_the_fog.ogg", 
-			"width": 2, 	
+			"video": "", 
+			"width": 4, 	
 			"hight": 1.0 },
         		{
 			"source": 1, 
 			"image": "image.jpg", 
 			"video": "", 
-			"width": 2, 	
+			"width": 4, 	
+			"hight": 1.0 },
+			{
+			"source": 1, 
+			"image": "image1.jpg",
+			"video": "hedgehog_in_the_fog.ogg", 
+			"width": 4, 	
+			"hight": 1.0 },
+        		{
+			"source": 1, 
+			"image": "image.jpg", 
+			"video": "", 
+			"width": 4, 	
 			"hight": 1.0 }
 			],
         	"north": 1,
