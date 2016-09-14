@@ -39,6 +39,8 @@ public class PresentationControl : MonoBehaviour
     private int sound_angle;
     private List<Texture2D> imageFrames;
     private Boolean isVideo = false;
+    private MovieTexture video;
+    private Boolean isPaused = false;
 
     public void Start()
     {
@@ -157,16 +159,17 @@ public class PresentationControl : MonoBehaviour
         while (!www_sound.isDone) { }
         yield return www_sound;
 
-        AudioClip presentationClip = www_sound.GetAudioClip(true, true, AudioType.WAV);
+  //      AudioClip presentationClip = ;
         
-        sound.GetComponent<AudioSource>().clip = presentationClip;
+        sound.GetComponent<AudioSource>().clip = www_sound.GetAudioClip(true, false, AudioType.WAV);
         sound.GetComponent<AudioSource>().spread = sound_angle;
-        sound.GetComponent<AudioSource>().Play();
+
+        if (!video.isPlaying)
+            sound.GetComponent<AudioSource>().Play();
     }
 
     public IEnumerator LoadVideoWWW(string url)
     {
-        // stop playing sounds
         sound.GetComponent<AudioSource>().Stop();
 
         //load videoj
@@ -175,14 +178,16 @@ public class PresentationControl : MonoBehaviour
         while (!www_video.isDone) { }
         yield return www_video;
 
-        MovieTexture video = www_video.movie;
-
-        vFrame.GetComponent<Renderer>().material.mainTexture = video;
+        video = www_video.movie;
+        
+        // connect sound
         vFrame.GetComponent<AudioSource>().clip = video.audioClip;
+        vFrame.GetComponent<Renderer>().material.mainTexture = video;
 
         video.Play();
         vFrame.GetComponent<AudioSource>().Play();
-      //
+
+        yield return null;
     }
 
     public void LoadNewScene(int numScene)
@@ -196,9 +201,10 @@ public class PresentationControl : MonoBehaviour
         int frameWidth;
         int imageWidth = 20;
 
-
-        Resources.UnloadUnusedAssets(); // clean
-
+        // clean
+        Resources.UnloadUnusedAssets();
+        StopAllCoroutines();
+        
         // vFrame is not active
         isVideo = false;
         vFrame.SetActive(false);
@@ -260,6 +266,7 @@ public class PresentationControl : MonoBehaviour
                 isVideo = true;
                 vFrame.SetActive(true);
                 StartCoroutine("LoadVideoWWW", urlVideo);
+                
             }
                 
 
@@ -353,6 +360,42 @@ public class PresentationControl : MonoBehaviour
         return nextScene;
     }
 
+    internal void ControlVideo(int mode)
+    {
+        try
+        {
+            switch (mode)
+            {
+                case 1:
+                    // play video
+                    vFrame.GetComponent<AudioSource>().clip = video.audioClip;
+                    //video.Play();
+                    video.Play();
+                    vFrame.GetComponent<AudioSource>().Play();
+                    isPaused = false;
+                    // stop playing sounds
+                    sound.GetComponent<AudioSource>().Pause();
+                    break;
+                case 2:
+                    //stop video
+                    video.Pause();
+                    vFrame.GetComponent<AudioSource>().Pause();
+                    isPaused = true;
+                    // play sounds
+                    sound.GetComponent<AudioSource>().Play();
+                    break;
+                default:
+                    print("Incorrect command.");
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            print(e.Message);
+
+        }
+
+    }
 }
 
 

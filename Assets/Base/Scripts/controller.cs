@@ -724,14 +724,25 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 				if(newInput == "U"){
 					sim.menus.GridUI.pos.z += (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
-					sim.input.processed = true;
+
+                    //play video
+                    controlVideo(1);
+
+                    sim.input.processed = true;
 				}	
 				
 				// back
 				if(newInput == "O"){
 					sim.menus.GridUI.pos.z -= (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
-					sim.input.processed = true;
+
+                    //stop video
+                    controlVideo(2);
+
+                    sim.input.processed = true;
+
+
+
 				}
 				
 				// scale up
@@ -1336,28 +1347,10 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 
     void changePresentation(int direction)
     {
-      //  fadeScene();
         
         changeScene(direction);
     }
 
-    void fadeScene()
-    {
-        if (sim.cameraMode == cameraTypes.Cave)
-        {
-            getReal3D.RpcManager.call("fadeScene_rpc");
-        }
-        else
-        {
-            fadeScene_rpc();
-        }
-    }
-
-    [getReal3D.RPC]
-    void fadeScene_rpc()
-    {
-
-    }
 
     void changeScene(int dir)
     {
@@ -1374,16 +1367,34 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
     [getReal3D.RPC]
     void changeScene_rpc(int dir)
     {
-        // green screen
-        // AutoFade.LoadScene(1, 10, 10, Color.green);
-     //   SceneManager.LoadScene(0);
-        // setFade_rpc(88);
+
         pr.LoadNewScene(dir);
-
-        // load new textures
         pr.LoadTextures();
-    //    SceneManager.LoadScene(1);
+    }
 
+    ////////////////////
+    //                //
+    //  controlVideo  //
+    //                //
+    ////////////////////
+
+    void controlVideo(int mode)
+    {
+        if (sim.cameraMode == cameraTypes.Cave)
+        {
+            getReal3D.RpcManager.call("controlVideo_rpc", mode);
+        }
+        else
+        {
+            controlVideo_rpc(mode);
+        }
+    }
+
+    [getReal3D.RPC]
+    void controlVideo_rpc(int mode)
+    {
+
+        pr.ControlVideo(mode);
     }
 
 
