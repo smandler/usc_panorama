@@ -39,7 +39,7 @@ public class PresentationControl : MonoBehaviour
     private int sound_angle;
     private List<Texture2D> imageFrames;
     private Boolean isVideo = false;
-    private MovieTexture video;
+    private MovieTexture video = null;
     private Boolean isPaused = false;
 
     public void Start()
@@ -158,14 +158,14 @@ public class PresentationControl : MonoBehaviour
 
         while (!www_sound.isDone) { }
         yield return www_sound;
-
-  //      AudioClip presentationClip = ;
         
         sound.GetComponent<AudioSource>().clip = www_sound.GetAudioClip(true, false, AudioType.WAV);
         sound.GetComponent<AudioSource>().spread = sound_angle;
 
-        if (!video.isPlaying)
+        if (!isVideo)
+        {
             sound.GetComponent<AudioSource>().Play();
+        }
     }
 
     public IEnumerator LoadVideoWWW(string url)
@@ -186,8 +186,6 @@ public class PresentationControl : MonoBehaviour
 
         video.Play();
         vFrame.GetComponent<AudioSource>().Play();
-
-        yield return null;
     }
 
     public void LoadNewScene(int numScene)
@@ -203,8 +201,8 @@ public class PresentationControl : MonoBehaviour
 
         // clean
         Resources.UnloadUnusedAssets();
-        //StopAllCoroutines();
-        
+        sound.GetComponent<AudioSource>().clip = null;
+
         // vFrame is not active
         isVideo = false;
         vFrame.SetActive(false);
@@ -213,23 +211,7 @@ public class PresentationControl : MonoBehaviour
             present.SetCurrentScene(present.scenes[0]);
 
         // get next scene
-        newScene = GetNextSceneByDirection(numScene, present);
-
-        // load scene sound
-        int sound_source = newScene.sound_source;
-        if (sound_source == 1)
-        {
-            url = "file://" + Application.dataPath + "/Files/" + newScene.sound;
-            //  img = LoadImage(url);
-        }
-        else if (sound_source == 2) // load from WWW
-        {
-            url = newScene.sound;
-
-        }
-
-        sound_angle = newScene.angle;
-        StartCoroutine("LoadSoundWWW", url);      
+        newScene = GetNextSceneByDirection(numScene, present); 
 
         // clean frames list
         imageFrames = new List<Texture2D>();
@@ -266,7 +248,6 @@ public class PresentationControl : MonoBehaviour
                 isVideo = true;
                 vFrame.SetActive(true);
                 StartCoroutine("LoadVideoWWW", urlVideo);
-                
             }
                 
 
@@ -306,6 +287,22 @@ public class PresentationControl : MonoBehaviour
 
             Destroy(img);
         }
+
+        // load scene sound
+        int sound_source = newScene.sound_source;
+        if (sound_source == 1)
+        {
+            url = "file://" + Application.dataPath + "/Files/" + newScene.sound;
+            //  img = LoadImage(url);
+        }
+        else if (sound_source == 2) // load from WWW
+        {
+            url = newScene.sound;
+
+        }
+
+        sound_angle = newScene.angle;
+        StartCoroutine("LoadSoundWWW", url);
 
         //LoadTextures();       
         present.SetCurrentScene(newScene);
@@ -360,27 +357,27 @@ public class PresentationControl : MonoBehaviour
         return nextScene;
     }
 
-    internal void ControlVideo(int mode)
+    public void ControlVideo(int mode)
     {
         try
         {
             switch (mode)
             {
                 case 1:
+                    // stop playing sounds
+                    sound.GetComponent<AudioSource>().Stop();
+
                     // play video
-                    vFrame.GetComponent<AudioSource>().clip = video.audioClip;
-                    //video.Play();
                     video.Play();
                     vFrame.GetComponent<AudioSource>().Play();
                     isPaused = false;
-                    // stop playing sounds
-                    sound.GetComponent<AudioSource>().Pause();
                     break;
                 case 2:
                     //stop video
                     video.Pause();
                     vFrame.GetComponent<AudioSource>().Pause();
                     isPaused = true;
+
                     // play sounds
                     sound.GetComponent<AudioSource>().Play();
                     break;

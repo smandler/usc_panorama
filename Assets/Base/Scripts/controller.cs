@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class controller : getReal3D.MonoBehaviourWithRpc {
     public PresentationControl pr = new PresentationControl();
-
+    private Boolean isPaused = false;
     /////////////////////
     // Mode management //
     /////////////////////
@@ -725,9 +725,6 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					sim.menus.GridUI.pos.z += (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
 
-                    //play video
-                    controlVideo(1);
-
                     sim.input.processed = true;
 				}	
 				
@@ -736,8 +733,18 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					sim.menus.GridUI.pos.z -= (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
 
-                    //stop video
-                    controlVideo(2);
+                    if (isPaused)
+                    {
+                        //play video
+                        controlVideo(1);
+                        isPaused = false;
+                    }
+                    else
+                    {
+                        //stop video
+                        controlVideo(2);
+                        isPaused = true;
+                    }
 
                     sim.input.processed = true;
 
