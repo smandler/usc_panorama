@@ -29,7 +29,7 @@
 			{
 			"source": 1, 
 			"image": "image.jpg", 
-			"video": "Funny_Cartoon.ogg", 
+			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 }
 			],
@@ -79,7 +79,7 @@
 			{
 			"source": 1, 
 			"image": "image1.jpg", 
-			"video": "", 
+			"video": "Funny_Cartoon.ogg", 
 			"width": 2, 	
 			"hight": 1.0 },
 			{

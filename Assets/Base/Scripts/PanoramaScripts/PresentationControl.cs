@@ -124,7 +124,7 @@ public class PresentationControl : MonoBehaviour
             Frame20.mainTexture = (imageFrames[19]);
         }
 
-     //   SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
         Resources.UnloadUnusedAssets(); // clean
     }
 
@@ -203,7 +203,7 @@ public class PresentationControl : MonoBehaviour
 
         // clean
         Resources.UnloadUnusedAssets();
-        StopAllCoroutines();
+        //StopAllCoroutines();
         
         // vFrame is not active
         isVideo = false;
