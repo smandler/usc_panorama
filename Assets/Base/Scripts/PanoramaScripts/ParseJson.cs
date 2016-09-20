@@ -62,6 +62,7 @@ public class Scenes
     public int angle;
     public string sound;
     public Frames[] frames;
+    public Clips[] clips;
     public int north;
     public int east;
     public int south;
@@ -73,7 +74,13 @@ public class Frames
 {
     public int source;
     public string image;
-    public string video = "";
     public int width;
     public float hight;
+}
+
+[System.Serializable]
+public class Clips
+{
+    public int source;
+    public string video = "";
 }

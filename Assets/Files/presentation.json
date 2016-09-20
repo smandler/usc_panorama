@@ -11,27 +11,32 @@
 			{
 			"source": 1, 
 			"image": "image1.jpg", 
-			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 },
 			{
 			"source": 1, 
 			"image": "image1.jpg", 
-			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 },
 			{
 			"source": 1, 
 			"image": "image1.jpg", 
-			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 },
 			{
 			"source": 1, 
 			"image": "image.jpg", 
-			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 }
+			],
+        	"clips":[
+			{
+			"source": 1, 
+			"video": "Funny_Cartoon.ogg"
+			},
+			{
+			"source": 1, 
+			"video": "hedgehog_in_the_fog.ogg" }
 			],
         	"north": 1,
         	"east": 2,
@@ -58,7 +63,7 @@
 			{
 			"source": 1, 
 			"image": "image1.jpg",
-			"video": "hedgehog_in_the_fog.ogg", 
+			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 },
         		{
@@ -67,6 +72,15 @@
 			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 }
+			],
+        	"videos":[
+			{
+			"source": 1, 
+			"video": "hedgehog_in_the_fog.ogg"
+			},
+			{
+			"source": 1, 
+			"video": "Funny_Cartoon.ogg" }
 			],
         	"north": 1,
         	"east": 2,
@@ -79,19 +93,16 @@
 			{
 			"source": 1, 
 			"image": "image1.jpg", 
-			"video": "Funny_Cartoon.ogg", 
 			"width": 2, 	
 			"hight": 1.0 },
 			{
 			"source": 1, 
 			"image": "image3.jpg", 
-			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 },
         		{
 			"source": 1, 
 			"image": "image2.jpg", 
-			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 }
 			],

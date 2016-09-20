@@ -476,6 +476,93 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                     sim.input.processed = true;
                 }
 
+                if (newInput == "S")
+                {
+                    if (sim.playerMode == modeTypes.Manual)
+                    {
+                        
+                    }
+
+                    if (sim.playerMode == modeTypes.Menu)
+                    {
+                        
+                    }
+
+                    if (sim.playerMode == modeTypes.Tour)
+                    {
+                        /*
+                        if (sim.tours.GuideCurrentSpeed > -2)
+                        {
+                            sim.tours.GuideCurrentSpeed -= 1;
+                            setPlaybackIndicator(sim.tours.GuideCurrentSpeed);
+                            tourAdjustSpeed(sim.tours.GuideCurrentId, sim.tours.GuideCurrentSpeed);
+                        }
+                        */
+                    }
+
+                    if (isPaused)
+                    {
+                        //play video
+                        controlVideo(1);
+                        isPaused = false;
+                    }
+                    else
+                    {
+                        //stop video
+                        controlVideo(2);
+                        isPaused = true;
+                    }
+
+                    // mark one shot as processed to prevent multiple triggerings of the associated event
+                    sim.input.processed = true;
+                }
+
+                if (newInput == "LB")
+                {
+                    if (sim.playerMode == modeTypes.Manual)
+                    {
+                      
+                    }
+
+                    if (sim.playerMode == modeTypes.Menu)
+                    {
+                        
+                    }
+
+                    if (sim.playerMode == modeTypes.Tour)
+                    {
+                    }
+
+                    //video back
+                    changeClips(-1);
+
+                    // mark one shot as processed to prevent multiple triggerings of the associated event
+                    sim.input.processed = true;
+                }
+
+                if (newInput == "RB")
+                {
+                    if (sim.playerMode == modeTypes.Manual)
+                    {
+
+                    }
+
+                    if (sim.playerMode == modeTypes.Menu)
+                    {
+
+                    }
+
+                    if (sim.playerMode == modeTypes.Tour)
+                    {
+
+                    }
+
+                    //video next
+                    changeClips(1);
+
+                    // mark one shot as processed to prevent multiple triggerings of the associated event
+                    sim.input.processed = true;
+                }
 
                 if (newInput == "L")
                 {
@@ -725,6 +812,8 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					sim.menus.GridUI.pos.z += (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
 
+                    changeClips(-1);
+
                     sim.input.processed = true;
 				}	
 				
@@ -733,6 +822,20 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
 					sim.menus.GridUI.pos.z -= (sim.menus.GridUI.posAdjust * sim.menus.GridUI.transformMultiplier);
 					broadcastGridUI_transforms();
 
+                    changeClips(1);
+
+                    sim.input.processed = true;
+
+
+
+				}
+				
+				// scale up
+				if(newInput == "N"){
+					// sim.menus.GridUI_siz.x += (sim.menus.GridUI_sizAdjust * sim.menus.GridUI_transformMultiplier);
+					sim.menus.GridUI.siz.y += (sim.menus.GridUI.sizAdjust * sim.menus.GridUI.transformMultiplier);
+					// sim.menus.GridUI_siz.z += (sim.menus.GridUI_sizAdjust * sim.menus.GridUI_transformMultiplier);
+					broadcastGridUI_transforms();
                     if (isPaused)
                     {
                         //play video
@@ -747,18 +850,6 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
                     }
 
                     sim.input.processed = true;
-
-
-
-				}
-				
-				// scale up
-				if(newInput == "N"){
-					// sim.menus.GridUI_siz.x += (sim.menus.GridUI_sizAdjust * sim.menus.GridUI_transformMultiplier);
-					sim.menus.GridUI.siz.y += (sim.menus.GridUI.sizAdjust * sim.menus.GridUI.transformMultiplier);
-					// sim.menus.GridUI_siz.z += (sim.menus.GridUI_sizAdjust * sim.menus.GridUI_transformMultiplier);
-					broadcastGridUI_transforms();
-					sim.input.processed = true;
 				}	
 				
 				// scale down
@@ -1358,6 +1449,24 @@ public class controller : getReal3D.MonoBehaviourWithRpc {
         changeScene(direction);
     }
 
+    void changeClips(int dir)
+    {
+        if (sim.cameraMode == cameraTypes.Cave)
+        {
+            getReal3D.RpcManager.call("changeClips_rpc", dir);
+        }
+        else
+        {
+            changeClips_rpc(dir);
+        }
+    }
+
+    [getReal3D.RPC]
+    void changeClips_rpc(int dir)
+    {
+
+        pr.changeVideo(dir);
+    }
 
     void changeScene(int dir)
     {

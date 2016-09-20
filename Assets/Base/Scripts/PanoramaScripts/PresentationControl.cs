@@ -41,6 +41,9 @@ public class PresentationControl : MonoBehaviour
     private Boolean isVideo = false;
     private MovieTexture video = null;
     private Boolean isPaused = false;
+    private int numVideo = -1;
+    private Scenes newScene;
+    private string urlVideo = "";
 
     public void Start()
     {
@@ -170,7 +173,8 @@ public class PresentationControl : MonoBehaviour
 
     public IEnumerator LoadVideoWWW(string url)
     {
-        sound.GetComponent<AudioSource>().Stop();
+        sound.GetComponent<AudioSource>().clip = null;
+        vFrame.GetComponent<AudioSource>().clip = null;
 
         //load videoj
         www_video = new WWW(url);
@@ -192,10 +196,9 @@ public class PresentationControl : MonoBehaviour
     {
 
         Texture2D img;
-        Scenes newScene;
         Presentation present = ParseJson.GetPresentation();
         string url = "";
-        string urlVideo = "";
+        
         int frameWidth;
         int imageWidth = 20;
 
@@ -216,31 +219,24 @@ public class PresentationControl : MonoBehaviour
         // clean frames list
         imageFrames = new List<Texture2D>();
 
-        int framesLength = 0;
-        framesLength = newScene.frames.Length;
 
-        // read frames, feel texture
-        for (int i = 0; i < framesLength; i++)
+        
+        // read the first clip, feel texture
+       if (newScene.clips.Length > 0)
         {
-            img = null;
             urlVideo = "";
-            // load image
-            int source = newScene.frames[i].source;
+            numVideo = 0;
+            int clip_source = newScene.clips[0].source;
 
-            if (source == 1)
+            if (clip_source == 1)
             {
-                url = "file://" + Application.dataPath + "/Files/" + newScene.frames[i].image;
-                if (newScene.frames[i].video != "")
-                    urlVideo = "file://" + Application.dataPath + "/Files/" + newScene.frames[i].video;
+                if (newScene.clips[0].video != "")
+                    urlVideo = "file://" + Application.dataPath + "/Files/" + newScene.clips[0].video;
             }
-            else if (source == 2) // load from WWW
+            else if (clip_source == 2) // load from WWW
             {
-                url = newScene.frames[i].image;
-                urlVideo = newScene.frames[i].video;
-
+                urlVideo = newScene.clips[0].video;
             }
-            StartCoroutine("LoadFromWWW", url);
-            img = www_img.texture;
 
             // load video
             if (urlVideo != "")
@@ -249,7 +245,28 @@ public class PresentationControl : MonoBehaviour
                 vFrame.SetActive(true);
                 StartCoroutine("LoadVideoWWW", urlVideo);
             }
-                
+        }
+
+        int framesLength = 0;
+        framesLength = newScene.frames.Length;
+        // read frames, feel texture
+        for (int i = 0; i < framesLength; i++)
+        {
+            img = null;
+ 
+            // load image
+            int source = newScene.frames[i].source;
+
+            if (source == 1)
+            {
+                url = "file://" + Application.dataPath + "/Files/" + newScene.frames[i].image;
+            }
+            else if (source == 2) // load from WWW
+            {
+                url = newScene.frames[i].image;
+            }
+            StartCoroutine("LoadFromWWW", url);
+            img = www_img.texture;             
 
             // frame width if 2 than frame feels 1/2 CAVE, if 4 than 1/4
             frameWidth = newScene.frames[i].width;
@@ -392,6 +409,43 @@ public class PresentationControl : MonoBehaviour
 
         }
 
+    }
+
+    public void changeVideo(int dir)
+    {
+        numVideo += dir;
+
+        if (newScene.clips.Length < numVideo)
+            numVideo = 0;
+
+        if (numVideo < 0)
+            numVideo = newScene.clips.Length - 1;
+        try
+        {
+            urlVideo = "";
+            int clip_source = newScene.clips[numVideo].source;
+
+            if (clip_source == 1)
+            {
+                if (newScene.clips[numVideo].video != "")
+                    urlVideo = "file://" + Application.dataPath + "/Files/" + newScene.clips[numVideo].video;
+            }
+            else if (clip_source == 2) // load from WWW
+            {
+                urlVideo = newScene.clips[numVideo].video;
+            }
+
+            // load video
+            if (urlVideo != "")
+            {
+                StartCoroutine("LoadVideoWWW", urlVideo);
+            }
+        }
+        catch (Exception e)
+        {
+            print(e.Message);
+
+        }
     }
 }
 
