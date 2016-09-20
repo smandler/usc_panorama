@@ -35,7 +35,8 @@ public class AutoFade : MonoBehaviour
 
     private void DrawQuad(Color aColor, float aAlpha)
     {
-        /*  GUITexture tex = instance.gameObject.GetComponent<GUITexture>();
+        getReal3D.GUI.BeginGUI();
+          GUITexture tex = instance.gameObject.GetComponent<GUITexture>();
           if (tex == null)
           {
               tex = instance.gameObject.AddComponent<GUITexture>();
@@ -46,11 +47,8 @@ public class AutoFade : MonoBehaviour
               tex.texture = tex2d;
           }
           tex.pixelInset = new Rect(0, 0, Screen.width, Screen.height);
-          tex.color = new Color(aColor.r, aColor.g, aColor.b, aAlpha);*/
-        Color colorHold = fadeSphere.gameObject.GetComponent<Renderer>().material.color;
-        colorHold.a = 0;
-        fadeSphere.gameObject.GetComponent<Renderer>().material.color = colorHold;
-
+          tex.color = new Color(aColor.r, aColor.g, aColor.b, aAlpha);
+        getReal3D.GUI.EndGUI();
     }
 
     private IEnumerator Fade(float aFadeOutTime, float aFadeInTime, Color aColor)

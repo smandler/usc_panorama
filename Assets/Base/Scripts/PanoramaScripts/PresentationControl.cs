@@ -202,6 +202,7 @@ public class PresentationControl : MonoBehaviour
         int frameWidth;
         int imageWidth = 20;
 
+        AutoFade.LoadScene(1, 1, 1, Color.green);
         // clean
         Resources.UnloadUnusedAssets();
         sound.GetComponent<AudioSource>().clip = null;
@@ -218,32 +219,33 @@ public class PresentationControl : MonoBehaviour
 
         // clean frames list
         imageFrames = new List<Texture2D>();
-
-
-        
+ 
         // read the first clip, feel texture
-       if (newScene.clips.Length > 0)
-        {
-            urlVideo = "";
-            numVideo = 0;
-            int clip_source = newScene.clips[0].source;
+        if (newScene.clips != null)
+        { 
+            if (newScene.clips.Length > 0)
+            {
+                urlVideo = "";
+                numVideo = 0;
+                int clip_source = newScene.clips[0].source;
 
-            if (clip_source == 1)
-            {
-                if (newScene.clips[0].video != "")
-                    urlVideo = "file://" + Application.dataPath + "/Files/" + newScene.clips[0].video;
-            }
-            else if (clip_source == 2) // load from WWW
-            {
-                urlVideo = newScene.clips[0].video;
-            }
+                if (clip_source == 1)
+                {
+                    if (newScene.clips[0].video != "")
+                        urlVideo = "file://" + Application.dataPath + "/Files/" + newScene.clips[0].video;
+                }
+                else if (clip_source == 2) // load from WWW
+                {
+                    urlVideo = newScene.clips[0].video;
+                }
 
-            // load video
-            if (urlVideo != "")
-            {
-                isVideo = true;
-                vFrame.SetActive(true);
-                StartCoroutine("LoadVideoWWW", urlVideo);
+                // load video
+                if (urlVideo != "")
+                {
+                    isVideo = true;
+                    vFrame.SetActive(true);
+                    StartCoroutine("LoadVideoWWW", urlVideo);
+                }
             }
         }
 

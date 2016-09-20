@@ -73,7 +73,7 @@
 			"width": 4, 	
 			"hight": 1.0 }
 			],
-        	"videos":[
+        	"clips":[
 			{
 			"source": 1, 
 			"video": "hedgehog_in_the_fog.ogg"
