@@ -10,33 +10,30 @@
         	"frames":[
 			{
 			"source": 1, 
-			"image": "image1.jpg", 
+			"image": "winter.jpg", 
 			"width": 4, 	
 			"hight": 1.0 },
 			{
 			"source": 1, 
-			"image": "image1.jpg", 
-			"width": 4, 	
-			"hight": 1.0 },
-			{
-			"source": 1, 
-			"image": "image1.jpg", 
+			"image": "map.jpg", 
 			"width": 4, 	
 			"hight": 1.0 },
 			{
 			"source": 1, 
 			"image": "image.jpg", 
 			"width": 4, 	
+			"hight": 1.0 },
+			{
+			"source": 1, 
+			"image": "steep.jpg", 
+			"width": 4, 	
 			"hight": 1.0 }
 			],
         	"clips":[
 			{
 			"source": 1, 
-			"video": "Funny_Cartoon.ogg"
-			},
-			{
-			"source": 1, 
-			"video": "hedgehog_in_the_fog.ogg" }
+			"video": "Kazakhstan.ogg"
+			}
 			],
         	"north": 1,
         	"east": 2,
@@ -49,38 +46,26 @@
 		"angle": 90,
         	"frames":[
 			{
-			"source": 2, 
-			"image": "https://www.universitiesaustralia.edu.au/Images/UserUploadedImages/387/USClogo.jpg",
-			"video": "", 
-			"width": 4, 	
-			"hight": 1.0 },
-        		{
-			"source": 1, 
-			"image": "image.jpg", 
-			"video": "", 
-			"width": 4, 	
-			"hight": 1.0 },
-			{
 			"source": 1, 
 			"image": "image1.jpg",
-			"video": "", 
 			"width": 4, 	
 			"hight": 1.0 },
         		{
 			"source": 1, 
-			"image": "image.jpg", 
-			"video": "", 
+			"image": "image2.jpg", 
+
+			"width": 4, 	
+			"hight": 1.0 },
+			{
+			"source": 1, 
+			"image": "image3.jpg",
+			"width": 4, 	
+			"hight": 1.0 },
+        		{
+			"source": 1, 
+			"image": "image4.jpg", 
 			"width": 4, 	
 			"hight": 1.0 }
-			],
-        	"clips":[
-			{
-			"source": 1, 
-			"video": "hedgehog_in_the_fog.ogg"
-			},
-			{
-			"source": 1, 
-			"video": "Funny_Cartoon.ogg" }
 			],
         	"north": 1,
         	"east": 2,
@@ -92,17 +77,22 @@
         	"frames":[
 			{
 			"source": 1, 
-			"image": "image1.jpg", 
-			"width": 2, 	
+			"image": "music1.jpg", 
+			"width": 4, 	
 			"hight": 1.0 },
 			{
 			"source": 1, 
-			"image": "image3.jpg", 
+			"image": "music2.jpg", 
+			"width": 4, 	
+			"hight": 1.0 },
+			{
+			"source": 1, 
+			"image": "music3.jpg", 
 			"width": 4, 	
 			"hight": 1.0 },
         		{
 			"source": 1, 
-			"image": "image2.jpg", 
+			"image": "music4.jpg", 
 			"width": 4, 	
 			"hight": 1.0 }
 			],

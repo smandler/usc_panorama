@@ -5,6 +5,11 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+/// <summary>
+/// This class contains methods that control all the viewable objects.
+/// 
+/// Public attributes must be edited (initialised) in the Unity editor.
+/// </summary>
 public class PresentationControl : MonoBehaviour
 {
     public GameObject sound;
@@ -36,6 +41,10 @@ public class PresentationControl : MonoBehaviour
     private WWW www_img;
     private WWW www_sound;
     private WWW www_video;
+
+    /// <summary>
+    /// The angle that the sound will be heard from.
+    /// </summary>
     private int sound_angle;
     private List<Texture2D> imageFrames;
     private Boolean isVideo = false;
@@ -169,6 +178,11 @@ public class PresentationControl : MonoBehaviour
         {
             sound.GetComponent<AudioSource>().Play();
         }
+
+        if ((isVideo) && (!video.isPlaying))
+        {
+            sound.GetComponent<AudioSource>().Play();
+        }
     }
 
     public IEnumerator LoadVideoWWW(string url)
@@ -190,8 +204,13 @@ public class PresentationControl : MonoBehaviour
 
         video.Play();
         vFrame.GetComponent<AudioSource>().Play();
+
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="numScene"></param>
     public void LoadNewScene(int numScene)
     {
 
@@ -202,7 +221,7 @@ public class PresentationControl : MonoBehaviour
         int frameWidth;
         int imageWidth = 20;
 
-        AutoFade.LoadScene(1, 1, 1, Color.green);
+        AutoFade.LoadScene(1, 1, 1, Color.grey);
         // clean
         Resources.UnloadUnusedAssets();
         sound.GetComponent<AudioSource>().clip = null;
