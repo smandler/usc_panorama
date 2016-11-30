@@ -15,6 +15,15 @@ public class PresentationControl : MonoBehaviour
     public GameObject sound;
     public GameObject vFrame;
 
+    /// <summary>
+    /// 
+    /// There are 20 colunmns/cubes in a presentation scene.
+    /// 
+    /// A set of materials for every cube from which the scene is built.
+    /// MainTexture is to be loaded to display the image for presentation.
+    /// There is a separate frame to show video clips.
+    /// 
+    /// </summary>
     public Material Frame1;
     public Material Frame2;
     public Material Frame3;
@@ -54,12 +63,24 @@ public class PresentationControl : MonoBehaviour
     private Scenes newScene;
     private string urlVideo = "";
 
+    /// <summary>
+    /// At the start of application we need to load a first scene.
+    /// After that textures should be loaded in materials.
+    /// </summary>
     public void Start()
     {
         LoadNewScene(0);
         LoadTextures();
     }
 
+    /// <summary>
+    /// The preparation of Texture2D to be places in colums' materials.
+    /// 
+    /// </summary>
+    /// <param name="image"></param>
+    /// <param name="width"></param>
+    /// <param name="height"></param>
+    /// <param name="imageFrames"></param>
     public void Split(Texture2D image, int width, int height, List<Texture2D> imageFrames)
     {
         bool perfectWidth = true;// image.width % width == 0;
@@ -95,6 +116,10 @@ public class PresentationControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loading textures in two modes - without video clips, and with...
+    /// 
+    /// </summary>
     public void LoadTextures()
     {
         // load textures
@@ -140,6 +165,13 @@ public class PresentationControl : MonoBehaviour
         Resources.UnloadUnusedAssets(); // clean
     }
 
+    /// <summary>
+    /// A test method to load image from file through File...
+    /// It is slower than WWW class...
+    /// 
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <returns></returns>
     public Texture2D LoadImage(string filePath)
     {
 
@@ -156,6 +188,12 @@ public class PresentationControl : MonoBehaviour
         return tex;
     }
 
+    /// <summary>
+    /// Loading images in a WWW class.
+    /// 
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
     public IEnumerator LoadFromWWW(string url)
     {
         www_img = new WWW(url);
@@ -164,6 +202,13 @@ public class PresentationControl : MonoBehaviour
         yield return www_img;
     }
 
+    /// <summary>
+    /// Loading sounds in a WWW class.
+    /// Connecting a sound component of application to an audio clip from loaded file.
+    /// 
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
     public IEnumerator LoadSoundWWW(string url)
     {
         www_sound = new WWW(url);
@@ -185,6 +230,15 @@ public class PresentationControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loading video clips in a WWW class.
+    /// Connecting a sound component of the video frame to an audio clip from loaded file.
+    /// The main texture of the video frame is video from the file.
+    /// 
+    /// 
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
     public IEnumerator LoadVideoWWW(string url)
     {
         sound.GetComponent<AudioSource>().clip = null;
@@ -208,6 +262,7 @@ public class PresentationControl : MonoBehaviour
     }
 
     /// <summary>
+    /// Loading all components of a scene for the presentation.
     /// 
     /// </summary>
     /// <param name="numScene"></param>
@@ -346,7 +401,14 @@ public class PresentationControl : MonoBehaviour
         present.SetCurrentScene(newScene);
     }
 
-
+    /// <summary>
+    /// Getting a new scene in accordance with user needs.
+    /// 
+    /// 
+    /// </summary>
+    /// <param name="dir"></param>
+    /// <param name="pres"></param>
+    /// <returns></returns>
     public Scenes GetNextSceneByDirection(int dir, Presentation pres)
     {
         Scenes curScene = null;
@@ -395,6 +457,11 @@ public class PresentationControl : MonoBehaviour
         return nextScene;
     }
 
+    /// <summary>
+    /// To pause or play a video clip.
+    /// 
+    /// </summary>
+    /// <param name="mode"></param>
     public void ControlVideo(int mode)
     {
         try
@@ -432,6 +499,11 @@ public class PresentationControl : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// To change a clip from clips set of the presentation.
+    /// 
+    /// </summary>
+    /// <param name="dir"></param>
     public void changeVideo(int dir)
     {
         numVideo += dir;

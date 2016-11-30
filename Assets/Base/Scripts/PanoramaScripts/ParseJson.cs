@@ -4,6 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
+/// <summary>
+/// 
+/// The script loads the data from Presentation.JSON.
+/// All information about scenes is kept in classes.
+/// 
+/// </summary>
 public class ParseJson : MonoBehaviour {
     public static Presentation items;
 
@@ -17,8 +23,6 @@ public class ParseJson : MonoBehaviour {
 
             items = Presentation.CreateFromJSON(json);
             
-//            Debug.Log(items.scenes[0].frames[0].image);
- //           Debug.Log(items.scenes[0].frames[1].image);
         }
     }
 
